@@ -1,0 +1,26 @@
+<title>FAQ Page</title>
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/FAQ's</h3>
+	</div>			
+<div class="panel-group" id="accordion">
+  {% for faq in object_list %}
+  
+  <div class="panel panel-default">
+    <div class="panel-heading" id="faqquestion">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ faq.id }}">
+        {{ faq.question }}
+		<i class="glyphicon glyphicon-plus pull-right"></i>
+		</a>
+      </h4>
+    </div>
+    <div id="collapse{{ faq.id }}" class="panel-collapse collapse">
+      <div class="panel-body">{{ faq.answer }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

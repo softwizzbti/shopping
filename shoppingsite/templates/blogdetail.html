@@ -1,0 +1,22 @@
+<title>Blog Page</title>
+{% extends 'base.html' %}
+{% load staticfiles%}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/ Blogs</h3>
+	</div>			
+<div class="row padding" id="blogs">
+  
+  
+  <div class="col-md-10 col-md-offset-1 blogs">
+  
+  <img src="/media/{{ blogs.pic }}" height="400" width="100%" />
+  <h2>{{ blogs.title }}</h2>
+  <p>{{ blogs.description|safe }}</p>
+  
+  </div>
+  
+  
+  
+</div>
+{% endblock %}

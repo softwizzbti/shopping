@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+	<div class="row" id="bimage">
+		<h3>Home/Category Products</h3>
+	</div>
+<div class="row">
+<div class="parallax1" id="image">
+</div>
+</div>
+    <div class="container">
+        <div class="row" style="margin-top: 6%;">
+    
+    {% if error %}
+    <h3>{{ error }}</h3>
+    {% endif %}
+    <form method="post" action='/paytm/payment/'>
+        {% csrf_token %}
+		<div class="col-md-4 col-md-offset-4" style="padding:30px;">
+                <div class="pages" style="font-size:30px; color:red; padding-bottom:20px;">
+                    Your Order
+                </div>
+                <ul class="list-group">
+                    {% for item in cart %}
+                        <li class="list-group-item">
+                        {{ item.quantity }}x {{ item.product.name }} 
+                        <span>Rs. {{ item.total_price }}</span>
+                        </li>
+                    {% endfor %}
+  
+                <li class="list-group-item active" style="color:white; font-size:22px;background:black;">Total Cost: Rs. {{ cart.get_total_price }}</li>
+                </ul>
+
+            
+        <input type="hidden" name="email" value="{{ order.email }}">
+        <input type="hidden" name="oid" value="{{ order.id }}">
+        <input type="hidden" name="amount" value="{{ cart.get_total_price }}">
+        <input type="submit" name="submit" value="PAY NOW" class="btn btn-success" required>
+		<br>
+		</div>
+    </form>
+</div>
+</div>
+
+{% endblock %}

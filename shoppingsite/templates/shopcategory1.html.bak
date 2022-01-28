@@ -1,0 +1,44 @@
+<title>Shop Category Page</title>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+			<div class="row" id="bimage">
+				<h3>Home/Category</h3>
+			</div>
+			<div class="row" id="category">
+				<div class="col-md-2 browse">
+					<h3>Browse Category</h3>
+					<hr style="height:2px; background-color:black;">
+					<nav class="">
+					<ul class="nav nav-tabs" style="text-transform:capitalize;">
+						<li class="active"><a data-toggle="tab" href="#all">All &nbsp;&nbsp;&nbsp;</a></li>
+						
+						
+						{%for c in cat %}
+						
+						<li><a href="/showproduct/{{ urlgenre }}/{{ c.id }}">{{ c.name }}</a></li>
+						
+						{% endfor %}
+					</ul>
+					</nav>
+				</div>
+				<div class="col-md-8 col-md-offset-1" id="products">
+					<div class="tab-content">
+						<div id="all" class="tab-pane fade in active">
+						{% for pmen in pro %}
+							<a href='/shopproducts/{{ pmen.id }}/{{ pmen.subcatid_id }}'><div class="col-md-4" id="pics">
+								<img src="/media/{{ pmen.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pmen.name|slice:"0:15" }}...</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pmen.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pmen.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+					</div>
+					
+				</div>
+			</div>
+			</div>
+{% endblock %}

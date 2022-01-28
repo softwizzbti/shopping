@@ -1,0 +1,100 @@
+<title>About Page</title>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/About</h3>
+	</div>
+	<div class="row" id="aboutpage">
+		<div class="col-md-6 col-md-offset-3" id="date">
+			<h2>Launched in October 2008</h2>
+			<h4>Fashion House is India's leading e-commerce marketplace with over <span style="color:#35afbd;">80 million</span> products across <span style="color:#35afbd;">80+ categories</span></h4>
+		</div>
+		
+		<div class="col-md-12" id="bagimage">
+			<div class="col-md-6 col-md-offset-3">
+				<img src="{% static 'images/20141125-225805-handbag.png'%}" height="550" 
+			width="100%"/>
+			</div>
+		</div>
+		<div class="col-md-12" id="numbers">
+		<div class="row">
+			<div class="col-md-3">
+				<h1><span id="num1">80</span>+ </h1>
+				<h3>Categories</h3>
+			</div>
+			<div class="col-md-3">
+				<h1><span id="num2">80</span> million</h1>
+				<h3>Products</h3>
+			</div>
+			<div class="col-md-3">
+				<h1><span id="num3">1</span> billion +</h1>
+				<h3>Customer</h3>
+			</div>
+			<div class="col-md-3">
+				<h1><span id="num4">50 </span> million +</h1>
+				<h3>Customer Satisfaction</h3>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-md-offset-3" id="date">
+			<h2>Started bt Team of 2</h2>
+			<h4>Now Fashion House is a large company with</h4>
+		</div>
+		<div class="col-md-12" id="detailimage">
+			<div class="col-md-6 col-md-offset-3">
+				<img src="{% static 'images/20161018-105350-20150824-132608-info-graphic2-1.png'%}" height="450" 
+			width="100%"/>
+			</div>
+		</div>
+	</div>
+
+<script>
+	
+	var t1=1;
+	var s1=setInterval(f1,50);
+	function f1()
+	{
+		document.getElementById('num1').innerHTML=t1;
+		if(t1>=80)
+		{
+			clearInterval(s1);
+		}
+		t1=t1+5;
+	}
+	var t2=0;
+	var s2=setInterval(f2,50);
+	function f2()
+	{
+		document.getElementById('num2').innerHTML=t2;
+		if(t2>=80)
+		{
+			clearInterval(s2);
+		}
+		t2=t2+5;
+	}
+	var t3=0;
+	var s3=setInterval(f3,50);
+	function f3()
+	{
+		document.getElementById('num3').innerHTML=t3;
+		if(t3>=80)
+		{
+			clearInterval(s3);
+		}
+		t3=t3+5;
+	}
+	var t4=0;
+	var s4=setInterval(f4,50);
+	function f4()
+	{
+		document.getElementById('num4').innerHTML=t4;
+		if(t4>=80)
+		{
+			clearInterval(s4);
+		}
+		t4=t4+5;
+	}
+	
+</script>
+{% endblock %}

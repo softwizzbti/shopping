@@ -1,0 +1,20 @@
+{% load staticfiles%}
+<html>
+	<head>
+		<title>Shop Product page</title>
+		<link href="{% static 'bootstrap/css/bootstrap.min.css'%}" type="text/css" rel="stylesheet"/>
+		<link href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}" type="text/css" rel="stylesheet"/>
+		<link href="{% static 'style.css'%}" type="text/css" rel="stylesheet"/>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			{% for e in emp %}
+				<div class="col-md-4">
+					<h2>{{e.name}}</h2>
+					<p>{{e.salary}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</body>
+</html>	

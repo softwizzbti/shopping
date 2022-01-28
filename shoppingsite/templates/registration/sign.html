@@ -1,0 +1,26 @@
+<title>Shop Category Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/Registration</h3>
+	</div>
+		<div class="row" id="signform">
+			<div class="col-md-6 col-md-offset-3">
+				<form method="post" class="forms">
+					{% csrf_token %}
+					<h1 id="register"> Registration Form</h1>
+					{% for field in form %}
+					
+						{{field.label_tag}}
+						{{field}}
+						<br>
+						{% for error in field.errors %}
+						<p style="color:red;">{{ error }}</p>
+						{% endfor %}
+					{% endfor %}
+					<center><input type="submit" id="registerbtn" class="btn btn-warning" value="REGISTER"/></center>
+				</form>
+			</div>
+		</div>
+{% endblock %}

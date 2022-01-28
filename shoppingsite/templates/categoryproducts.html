@@ -1,0 +1,23 @@
+<title>Show Category Products Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/Category Products</h3>
+	</div>
+	<div class="row" id="catpro">
+		{% for prod in rpro %}
+		
+			<a href='/shopproducts/{{ prod.id }}/{{ prod.subcatid_id }}'><div class="col-md-3" id="pics">
+			<img src="/media/{{ prod.pic1 }}" height="250" width="100%"/>
+			<div class="col-md-12 price">
+				<h1><span>{{ prod.name|slice:"0:15" }}...</span></h1>
+				<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ prod.mrp }}</span>
+				<span class="sellingprice pull-right">Rs. {{ prod.sellingprice }}</span>
+				</p>
+			</div>
+			</div></a>
+			
+		{% endfor %}	
+	</div>
+{% endblock %}

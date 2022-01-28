@@ -1,0 +1,307 @@
+<title>Home Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+					
+			<div class="row" id="intro">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+		<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="{% static 'images/background/background5.jpg'%}"/>
+					<div class="carousel-caption">
+						<h2>Fashion House</h2><br>
+						<h1>Fashion <br>Collection <br>2021</h1>
+						<a href="#banner"><button class="btn btn-info" id="btn1">Shop Now</button></a>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="{% static 'images/background/b16.jpg'%}"/>
+					<div class="carousel-caption">
+						<h2>Fashion House</h2><br>
+						<h1>Fashion <br>Collection <br>2021</h1>
+						<a href="#banner"><button class="btn btn-info" id="btn1">Shop Now</button></a>
+					</div>
+				</div>
+	
+				<div class="item">
+					<img src="{% static 'images/background/b18.jpg'%}"/>
+					<div class="carousel-caption">
+						<h2>Fashion House</h2><br>
+						<h1>Fashion <br>Collection <br>2021</h1>
+						<a href="#banner"><button class="btn btn-info" id="btn1">Shop Now</button></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+			</div>
+			<div class="row text-center" id="banner">
+				<div class="col-md-4">
+					<img id="bannerpic" src="{% static 'images/men clothes/men8.jpg'%}" height="500" width="100%"/></br>
+					<a href="/shopcategory1/1"><button id="btn2">Shop for Male</button></a>
+				</div>
+				<div class="col-md-4">
+					<img id="bannerpic" src="{% static 'images/women clothes/Shreeji_RN_NX_85.jpg'%}" height="500" width="100%"/></br>
+					<a href="/shopcategory1/2"><button id="btn2" class="">Shop for Female</button></a>
+				</div>
+				<div class="col-md-4">
+					<img id="bannerpic" src="{% static 'images/kids clothes/kids2.jpeg'%}" height="500" width="100%"/></br>
+					<a href="/shopcategory1/3"><button id="btn2"  class="">Shop for Kids</button></a>
+				</div>
+			</div>
+			<div class="row" id="offer">
+					<h1>Discount</h1>
+					<h2>50% OFF</h2>
+					<a href="/offer/"><button class="btn btn-success" id="btnoffer">Discover Now</button></a>
+					<h4>Limited Time Offer</h4>
+			</div>
+			<div class="row" id="newarrival">
+				<div class="col-md-12">
+					<h1>New Arrival</span></h1>
+				</div>
+				<div class="col-md-8 col-md-offset-2" id="newarrivalbtn">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#all">All</a></li>
+						<li><a data-toggle="tab" href="#men">Men</a></li>
+						<li><a data-toggle="tab" href="#women">Women</a></li>
+						<li><a data-toggle="tab" href="#kids">Kids</a></li>
+					</ul>
+				</div>
+					<div class="tab-content">
+						<div id="all" class="tab-pane fade in active">
+						{% for pbest in best %}
+							<a href='/shopproducts/{{ pbest.id }}/{{ pbest.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pbest.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span >{{ pbest.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pbest.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pbest.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						</div>
+					<div id="men" class="tab-pane fade">
+						{% for pmen in men %}
+							<a href='/shopproducts/{{ pmen.id }}/{{ pmen.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pmen.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pmen.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pmen.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pmen.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+					</div>
+					<div id="women" class="tab-pane fade">
+						{% for pwomen in women %}
+							<a href='/shopproducts/{{ pwomen.id }}/{{ pwomen.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pwomen.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pwomen.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pwomen.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pwomen.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}	
+					</div>
+					<div id="kids" class="tab-pane fade">
+						{% for pkids in kids %}
+							<a href='/shopproducts/{{ pkids.id }}/{{ pkids.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pkids.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span >{{ pkids.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pkids.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pkids.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+					</div>
+				</div>
+		</div>
+		<div class="row" id="stylishpro">
+		<div class="col-xs-11 col-md-10 col-centered">
+			<div id="stylehead"><h1>Stylish Products</h1></div>
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+				<div class="carousel-inner">
+				{% for pstylish in stylish %}
+					<div class="item ">
+						<div class="carousel-col">
+							
+							<a href='/shopproducts/{{ pstylish.id }}/{{ pstylish.subcatid_id }}'><div class="row" id="productdet">
+								<img src="/media/{{ pstylish.pic1 }}" style="height:300px !important;" width="20%"/>
+								<div class="col-md-12 pricedet">
+									<h1><span>{{ pstylish.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pstylish.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pstylish.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<!-- Controls -->
+				<div class="left carousel-control">
+					<a href="#carousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+				</div>
+				<div class="right carousel-control">
+					<a href="#carousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+			<div class="row" id="differentpro">
+				<div class="col-md-12" id="allbtns">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#featured">Featured</a></li>
+						<li><a data-toggle="tab" href="#top">Top</a></li>
+						<li><a data-toggle="tab" href="#popular">Popular</a></li>
+						<li><a data-toggle="tab" href="#trending">Trending</a></li>
+						<li><a data-toggle="tab" href="#beautiful">Beautiful</a></li>
+						<li><a data-toggle="tab" href="#awesome">Awesome</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="featured" class="tab-pane fade in active">
+						{% for pfeatured in featured %}
+							<a href='/shopproducts/{{ pfeatured.id }}/{{ pfeatured.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pfeatured.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pfeatured.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pfeatured.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pfeatured.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						<a href="/viewmore/featured"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+						</div>
+					<div id="top" class="tab-pane fade">
+						{% for ptop in top %}
+							<a href='/shopproducts/{{ ptop.id }}/{{ ptop.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ ptop.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ ptop.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ ptop.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ ptop.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						<a href="/viewmore/top"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+					</div>
+					<div id="popular" class="tab-pane fade">
+						{% for ppopular in popular %}
+							<a href='/shopproducts/{{ ppopular.id }}/{{ ppopular.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ ppopular.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ ppopular.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ ppopular.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ ppopular.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}	
+						<a href="/viewmore/popular"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+					</div>
+					<div id="trending" class="tab-pane fade">
+						{% for ptrending in trending %}
+							<a href='/shopproducts/{{ ptrending.id }}/{{ ptrending.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ ptrending.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ ptrending.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ ptrending.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ ptrending.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						<a href="/viewmore/trending"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+					</div>
+					<div id="beautiful" class="tab-pane fade">
+						{% for pbeautiful in beautiful %}
+							<a href='/shopproducts/{{ pbeautiful.id }}/{{ pbeautiful.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pbeautiful.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pbeautiful.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pbeautiful.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pbeautiful.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						<a href="/viewmore/beautiful"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+					</div>
+					<div id="awesome" class="tab-pane fade">
+						{% for pawesome in awesome %}
+							<a href='/shopproducts/{{ pawesome.id }}/{{ pawesome.subcatid_id }}'><div class="col-md-3" id="pics">
+								<img src="/media/{{ pawesome.pic1 }}" height="250" width="100%"/>
+								<div class="col-md-12 price">
+									<h1><span>{{ pawesome.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ pawesome.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ pawesome.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						{% endfor %}
+						<a href="/viewmore/awesome"><button class="btn btn-info" id="btnoffer" style="margin-left:1100px;">View More</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="row" id="gurantee">
+				<div class="col-md-3">
+				<div class="col-md-12 features">
+					<img src="{% static 'images/money-bag.png'%}"/>
+					<h3>MONEY BACK GURANTEE</h3>
+					<h5></h5>
+				</div>
+				</div>
+				<div class="col-md-3">
+				<div class="col-md-12 features">
+					<img src="{% static 'images/truck.png'%}"/>
+					<h3>FREE <br>DELIVERY</h3>
+				</div>
+				</div>
+				<div class="col-md-3">
+				<div class="col-md-12 features">
+					<img src="{% static 'images/headphone.png'%}"/>
+					<h3>ALWAYS </br>SUPPORT</h3>
+				</div>
+				</div>
+				<div class="col-md-3">
+				<div class="col-md-12 features">
+					<img src="{% static 'images/hand.png'%}"/>
+					<h3>SECURE</br> PAYMENT</h3>
+				</div>
+				</div>
+			</div>
+{% endblock %}

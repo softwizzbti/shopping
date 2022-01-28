@@ -1,0 +1,18 @@
+<title>Shop Category Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/Category</h3>
+	</div>	
+		<div class="row" id="loginform">
+			<div class="col-md-6 col-md-offset-3">
+				<form method="post" class="forms">
+					{% csrf_token %}
+					<h1 id="login">Login</h1>
+					{{form.as_p}}
+					<center><input type="submit" id="loginbtn" class="btn btn-warning" value="LOGIN"/></center>
+				</form>
+			</div>
+		</div>
+{% endblock %}

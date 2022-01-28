@@ -1,0 +1,21 @@
+<title>Blog Page</title>
+{% extends 'base.html' %}
+{% load staticfiles%}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/ Blogs</h3>
+	</div>			
+<div class="row text-center padding" id="blogs">
+  {% for b in blogs %}
+  <div class="col-md-4">
+  <div class="col-md-12 blogs">
+  <a href="/blogdetail/{{ b.id }}">
+  <img src="/media/{{ b.pic }}" height="300" width="100%" />
+  <h4>{{ b.title }}</h4>
+  </a>
+  </div>
+  </div>
+  
+  {% endfor %}
+</div>
+{% endblock %}

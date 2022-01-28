@@ -1,0 +1,246 @@
+<title>Shop Products Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% load filter_tags %}
+{% block content %}
+
+	<div class="row" id="bimage">
+		<h3>Home/Shop Product</h3>
+	</div>
+	<div class="row" id="productimage">
+		<div class="col-md-6">
+			<div class="container-fluid">
+				<div id="custom_carousel" class="carousel slide" data-ride="carousel" data-interval="2500">
+				<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+						<div class="item active">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12"><img src="/media/{{ pro.pic1 }}" class="img-responsive"></div>
+								</div>
+							</div>            
+						</div> 
+						<div class="item">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12"><img src="/media/{{ pro.pic2 }}" class="img-responsive"></div>
+								</div>
+							</div>            
+						</div> 
+						<div class="item">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12"><img src="/media/{{ pro.pic3 }}" class="img-responsive"></div>                       
+								</div>
+							</div>           
+						</div> 
+						<div class="item">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12"><img src="/media/{{ pro.pic4 }}" class="img-responsive"></div>                      
+								</div>
+							</div>           
+						</div> 
+						<!-- End Item -->
+					</div>
+					<!-- End Carousel Inner -->
+					<div class="controls">
+						<ul class="nav">
+							<li data-target="#custom_carousel" data-slide-to="0" class="active"><a href="#"><img src="/media/{{ pro.pic1 }}"></a></li>
+							<li data-target="#custom_carousel" data-slide-to="1"><a href="#"><img src="/media/{{ pro.pic2 }}"></a></li>
+							<li data-target="#custom_carousel" data-slide-to="2"><a href="#"><img src="/media/{{ pro.pic3 }}"></a></li>
+							<li data-target="#custom_carousel" data-slide-to="3"><a href="#"><img src="/media/{{ pro.pic4 }}"></a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- End Carousel -->
+			</div>
+		</div>
+		<div class="col-md-6" id="details">
+			<h1>{{ pro.brand }}</h1>
+			<h3>{{ pro.name }}</h3>
+			<h2>Rs. {{ pro.sellingprice }}</h2>
+			<h5>Rs. {{ pro.mrp }}</h5>
+			<h4>Category     : {{ pro.subcatid }}</h4>
+			<h4>Available    : {{ pro.available}}</h4>
+			<hr style="height:2px; color:black;">
+			<form action="{% url 'cart:cart_add' pro.id %}" method="post">
+				{% csrf_token %}
+                {{ cart_product_form }}
+                <input type="submit" value="add to cart" class="btn btn-primary">
+            </form>
+			<nav class="">
+				<ul class="nav navbar-nav">
+					<li><i style="padding-left:20px; padding-right:20px;" class="fa fa-facebook-f icons"></i></li>
+					<li><i class="fa fa-twitter icons"></i></li>
+					<li><i style="padding-left:17px; padding-right:17px;" class="fa fa-linkedin icons"></i></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="row" id="buttons">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#description">Description</a></li>
+			<li><a data-toggle="tab" href="#specification">Specification</a></li>
+			<li><a data-toggle="tab" href="#comments">Comments</a></li>
+			<li><a data-toggle="tab" href="#reviews">Reviews</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="description" class="tab-pane fade in active">
+				<p>{{ pro.description }}</p>
+			</div>
+			<div id="specification" class="tab-pane fade">
+				<table class="table">
+					<tbody>
+					
+						{% with pro.specification|split:"," as tags %}
+							{% for tag in tags %}
+							
+							<tr>
+							{% with tag|split:":" as tagsdetail %}
+							{% for tagd in tagsdetail %}
+								<td>{{ tagd }}</td>
+								
+								{% endfor %}
+						{% endwith %}
+								</tr>
+							{% endfor %}
+						{% endwith %}
+					</tbody>
+				</table>
+			</div>
+			<div id="comments" class="tab-pane fade">
+				<div class="col-md-6" id="inform">
+					{% for commt in com %}
+					<div id="persondet">
+					<h1>{{ commt.name }}</h1>
+					<p>{{ commt.comment }}</p>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="col-md-6">
+					{% if user.is_authenticated %}
+					<form  method="post" enctype="multipart/form-data" id="formcomment">
+					{% csrf_token %}
+						<label><h3>Post a Comment</h3></label><br>
+						
+						<input class="form-control" type="text" name="name" id="t1" placeholder="Enter your name"/><br><br>
+						<input class="form-control" type="text" name="email" id="t1" placeholder="Enter your Email Address"/><br><br>
+						<input class="form-control" type="text" name="phone" id="t1" placeholder="Enter your Phone Number"/><br><br>
+						<textarea class="form-control" name="comment" id="t1" placeholder="Comment"></textarea><br><br>
+						<input type="hidden" name="userid" value="{{ user.id }}"/>
+						<input type="hidden" name="productid" value="{{ pro.id }}"/>
+						<button class="btn btn-info" id="btncomment" type="submit">Submit Now</button>
+					</form>
+					{% else %}
+					<p>You need to login first</p>
+					{% endif %}
+					<div id="successdiv"></div>
+					<div id="errordiv"></div>
+				</div>
+			</div>
+			<div id="reviews" class="tab-pane fade">
+				<div class="col-md-6" id="comm">
+					<div class="col-md-6" id="box">
+						<h3>Overall</h3>
+						<h1>4.0</h1>
+						<h6> Reviews</h6>
+					</div>
+					<div class="col-md-6">
+						<h2>Based on<br> Reviews</h2>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star-half"></i>
+					</div>
+					<div class="col-md-12" id="inform">
+						{% for revi in rev %}
+						<div id="persondet">
+						<h1>{{ revi.name }}</h1>
+						<p>{{ revi.message }}</p>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-md-6">
+					
+						<label><h2>Add a Review</h2></label><br>
+						<h5>Your Rating:&nbsp;
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						Outstanding</h5><br>
+						{% if user.is_authenticated %}
+						<form method="post" enctype="multipart/form-data" id="formreview">
+						{% csrf_token %}
+						<input class="form-control" type="text" name="name" id="t1" placeholder="Enter your name"/><br><br>
+						<input class="form-control" type="text" name="email" id="t1" placeholder="Enter your Email Address"/><br><br>
+						<input class="form-control" type="text" name="phone" id="t1" placeholder="Enter your Phone Number"/><br><br>
+						<textarea class="form-control" name="message" id="t1" placeholder="Message"></textarea><br><br>
+						<input type="hidden" name="userid" value="{{ user.id }}"/>
+						<input type="hidden" name="pid" value="{{ pro.id }}"/>
+						<button class="btn btn-info" id="btncomment" type="submit">Submit Now</button>
+					</form>
+					{% else %}
+					<p>You need to login first</p>
+					{% endif %}
+					<div id="successdiv"></div>
+					<div id="errordiv"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-11 col-md-10 col-centered">
+			<div id="stylehead"><h1>Related Products</h1></div>
+			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+				<div class="carousel-inner">
+					{% for prelated in rpro %}
+					<div class="item ">
+						<div class="carousel-col">
+							
+							<a href='/shopproducts/{{ prelated.id }}/{{ prelated.subcatid_id }}'><div class="row" id="productdet">
+								<img src="/media/{{ prelated.pic1 }}" style="height:300px !important;" width="20%"/>
+								<div class="col-md-12 pricedet">
+									<h1><span>{{ prelated.brand }}</span></h1>
+									<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ prelated.mrp }}</span>
+									<span class="sellingprice pull-right">Rs. {{ prelated.sellingprice }}</span>
+									</p>
+								</div>
+							</div></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<!-- Controls -->
+				<div class="left carousel-control">
+					<a href="#carousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+				</div>
+				<div class="right carousel-control">
+					<a href="#carousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+		<hr>
+		<hr>
+	<script>
+		$(document).ready(function(ev){
+			$('#custom_carousel').on('slide.bs.carousel', function (evt) {
+				$('#custom_carousel .controls li.active').removeClass('active');
+				$('#custom_carousel .controls li:eq('+$(evt.relatedTarget).index()+')').addClass('active');
+			})
+		});
+	</script>
+	
+{% endblock %}
+

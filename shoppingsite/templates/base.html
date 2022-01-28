@@ -1,0 +1,217 @@
+{% load static %}
+<html>
+	<head>
+		<link href="{% static 'bootstrap/css/bootstrap.min.css'%}" type="text/css" rel="stylesheet"/>
+		<link href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}" type="text/css" rel="stylesheet"/>
+		<link href="{% static 'style.css'%}" type="text/css" rel="stylesheet"/>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div class="col-md-4">
+					<h1> <i class="fa fa-shopping-bag"></i> Fashion House</h1>
+				</div>
+				<div class="col-md-5" id="nav">
+					<nav class="">
+					<ul class="nav navbar-nav">
+					<li><a href="/design1/">Home</a></li>
+					<li><a href="/shopcategory1/1">Men</a></li>
+					<li><a href="/shopcategory1/2">Women</a></li>
+					<li><a href="/shopcategory1/3">Kids</a></li>
+					
+					
+					</ul>
+					</nav>
+				</div>
+				<div class="col-md-3" id="searchbar">
+					<div id="userlogin">
+						{% if user.is_authenticated %}
+							<a>Hi, {{ user.username }}</a>
+							<a href="/logout/">Logout</a>
+						{% else %}
+							<a href="/login/">Login</a>
+							<a href="/sign/">Register</a>
+						{% endif %}
+					</div>
+					<div id="search">
+						<form method="GET" action="{% url 'shoppingsite:search_result' %}">
+						<div class="input-group">
+							<input class="form-control" id="searchbox" placeholder="What is your mind today?" type="text" name="qname"> 
+							<div class="input-group-btn">
+								<button class="btn btn-warning btn-block" name="button" id="searchbtn"><i class="glyphicon glyphicon-search"> </i> </button>
+							</div>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="navbar">
+			<nav class="">
+					<ul class="nav navbar-nav" >
+					<li><a href="javascript:void(0)" style="border-right:2px solid white; text-transform:capitalize; font-size:20px;">Shop By Category</a></li>
+					{% for cate in cats %}
+						<li class="dropdown" style="font-size:20px;">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ cate.name }} <i class="fa fa-caret-down"></i></a>
+							<ul class="dropdown-menu">
+								{% for subcat in cate.subcategories.all %}
+								<li><a href="/categoryproducts/{{ subcat.id }}">{{ subcat.name }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% endfor%}
+					</ul>
+					</nav>
+			</div>
+
+			
+		{% block content %}	
+		{% endblock %}
+			
+			
+			
+			
+			<div class="row" id="advertisement">
+				<div class="col-md-2">
+					<img src="{% static 'images/men clothes/men9.jpg'%}" height="200" width="100%"/>
+				</div>
+				<div class="col-md-2">
+					<img src="{% static 'images/kids clothes/kids6.jpeg'%}" height="200" width="100%"/>
+				</div>
+				<div class="col-md-2">
+					<img src="{% static 'images/women clothes/pexels-anastasiya-gepp-2065200.jpg'%}" height="200" width="100%"/>
+				</div>
+				<div class="col-md-2">
+					<img src="{% static 'images/men clothes/jackets/j1.jpeg'%}" height="200" width="100%"/>
+				</div>
+				<div class="col-md-2">
+					<img src="{% static 'images/men rings/r19.jpg'%}" height="200" width="100%"/>
+				</div>
+				<div class="col-md-2">
+					<img src="{% static 'images/shoes/shoe8.jpg'%}" height="200" width="100%"/>
+				</div>
+			</div>
+			<div class="row" id="footer">
+				<div class="col-md-2 nav">
+					<h3>Category</h3>
+					<nav class="">
+					<ul class="nav">
+					<li><a href="/shopcategory1/1">Men</a></li>
+					<li><a href="/shopcategory1/2">Women</a></li>
+					<li><a href="/shopcategory1/3">Kids</a></li>
+					</ul>
+					</nav>
+				</div>
+				<div class="col-md-2 nav">
+					<h3>Company</h3>
+					<nav class="">
+					<ul class="nav">
+					<li><a href="/about/">About</a></li>
+					<li><a href="/offer/">Offer</a></li>
+					<li><a href="/faqs/">FAQ</a></li>
+					<li><a href="/contact/">Contact</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					</ul>
+					</nav>
+				</div>
+				<div class="col-md-3 nav">
+					<h3>Help & Information</h3>
+					<nav class="">
+					<ul class="nav">
+					<li><a href="/security/">Security</a></li>
+					<li><a href="/returnrefund/">Return & Refund</a></li>
+					<li><a href="/termsconditions/">Terms & Conditions</a></li>
+					<li><a href="/privacypolicy/">Privacy Policy</a></li>
+					</ul>
+					</nav>
+				</div>
+				<div class="col-md-5 nav">
+					<form action="/insertsubscribe/" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+						<label><h3>Newsletter</h3></label><br>
+						<input type="text" class="form-control" style="border:2px solid; border-color:#2e7eff; width:70%;" name="email" placeholder="Email Address"/></br>
+						<button id="footerbtn" type="submit">Subscribe</button>
+						<br><br>
+						<i style="padding-left:20px; padding-right:20px;" class="fa fa-facebook-f icons"></i>
+						<i class="fa fa-twitter icons"></i>
+						<i style="padding-left:16px; padding-right:16px;" class="fa fa-instagram icons"></i>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="{% static 'jquery.js'%}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+	<script>
+		$(document).ready(function(){
+		$('.forms input').addClass('form-control');
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+    $("#formcomment").on("submit", function(event){
+        event.preventDefault();
+		//alert('in');
+		var frm=$("#formcomment");
+		var d=frm.serialize();
+		//alert(d);
+			$.ajax({
+				type: 'POST',
+				url: '/insertcomment/',
+				data: frm.serialize(),
+				success: function (){
+					$("#successdiv").html('Comment successfuly posted');
+					alert('Save Data');
+                    window.location.reload();
+				}
+			});
+			//return false;
+		});
+		});
+	</script>
+		<script>
+		$(document).ready(function(){
+    $("#formreview").on("submit", function(event){
+        event.preventDefault();
+		//alert('in');
+		var frm=$("#formreview");
+		var d=frm.serialize();
+		//alert(d);
+			$.ajax({
+				type: 'POST',
+				url: '/insertreview/',
+				data: frm.serialize(),
+				success: function (){
+					$("#successdiv").html('Review successfuly posted');
+					alert('Save Data');
+                    window.location.reload();
+				}
+			});
+			//return false;
+		});
+		});
+	</script>
+	<script>
+	$(document).ready(function(){
+	$("#carousel .item:first-child").addClass('active');
+	});
+	
+$('.carousel[data-type="multi"] .item').each(function() {
+	var next = $(this).next();
+	if (!next.length) {
+		next = $(this).siblings(':first');
+	}
+	next.children(':first-child').clone().appendTo($(this));
+
+	for (var i = 0; i < 2; i++) {
+		next = next.next();
+		if (!next.length) {
+			next = $(this).siblings(':first');
+		}
+
+		next.children(':first-child').clone().appendTo($(this));
+	}
+});
+</script>
+
+</html>	

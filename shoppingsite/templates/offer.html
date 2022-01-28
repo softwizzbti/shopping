@@ -1,0 +1,25 @@
+<title>Offer Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="row" id="bimage">
+		<h3>Home/Category</h3>
+	</div>
+	<div class="row" id="offers">
+		<h1>Maximum Discount Products</h1>
+	</div>
+	<div class="row" id="showpro">
+	{% for product in pro %}
+			<a href='/showproduct/{{ product.id }}/{{ product.catid }}'><div class="col-md-3" id="pics">
+			<img src="/media/{{ product.pic1 }}" height="250" width="100%"/>
+			<div class="col-md-12 price">
+				<h1><span>{{ product.name|slice:"0:15" }}...</span></h1>
+				<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ product.mrp }}</span>
+				<span class="sellingprice pull-right">Rs. {{ product.sellingprice }}</span>
+				</p>
+				<p><span>Product Offer:{{ product.offer }}%</span></p>
+			</div>
+			</div></a>
+		{% endfor %}	
+	</div>
+{% endblock %}

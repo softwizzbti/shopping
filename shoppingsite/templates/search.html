@@ -1,0 +1,28 @@
+<title>Search Page</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row" id="bimage">
+	<h3>Home/Category</h3>
+</div>
+<div class="row" id="searchpage">
+	<h1>Search Products</h1>
+</div>
+<div class="row">
+	{% for product in pro %}
+		
+			<a href='/shopproducts/{{ product.id }}/{{ product.subcatid_id }}'>
+			<div class="col-md-3" id="productdet">
+				<img src="/media/{{ product.pic1 }}" height="300" width="100%"/>
+				<div class="col-md-12 pricedet">
+					<h1><span>{{ product.name|slice:"0:15" }}...</span></h1>
+					<p><span class="mrp pull-left" style="text-decoration:line-through;">Rs. {{ product.mrp }}</span>
+					<span class="sellingprice pull-right">Rs. {{ product.sellingprice }}</span>
+					</p>
+				</div>
+			</div></a>
+		
+	{% endfor %}
+</div>
+
+{% endblock %}
